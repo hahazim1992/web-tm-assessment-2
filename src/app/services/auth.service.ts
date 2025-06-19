@@ -21,7 +21,16 @@ export class AuthService {
       tap(res => {
         if (res.success && res.token) {
           localStorage.setItem(this.tokenKey, res.token);
-          localStorage.setItem(this.expiryKey, res.tokenExpiry);
+
+          // Convert "1hr" to a real expiry date (1 hour from now)
+          let expiry: string;
+          if (res.tokenExpiry === '1hr') {
+            expiry = new Date(Date.now() + 60 * 60 * 1000).toISOString();
+          } else {
+            expiry = res.tokenExpiry;
+          }
+          localStorage.setItem(this.expiryKey, expiry);
+
           this.isAuthenticated$.next(true);
           this.autoLogout();
         }

@@ -65,4 +65,10 @@ export class ProductService {
   private generateId(): string {
     return Math.random().toString(36).substring(2, 10);
   }
+
+  deleteProduct(id: string): void {
+    const products = this.getLocalProducts();
+    const updated = products.filter(p => p.id !== id);
+    this.save(updated);
+  }
 }

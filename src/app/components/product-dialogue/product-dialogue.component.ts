@@ -32,26 +32,33 @@ export class ProductDialogComponent {
   ) {
     this.productForm = this.fb.group({
       productName: [data?.productName || '', Validators.required],
-      url: [data?.url || '', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]]
+      url: [data?.url || 'https://www', [Validators.required, Validators.pattern(/^https?:\/\/.+/)]]
     });
   }
 
   onSubmit() {
-  if (this.productForm.valid) {
-    const productData = this.productForm.value;
-    if (this.data) {
-      // Edit mode
-      this.productService.updateProduct(this.data.id, productData);
-      this.dialogRef.close(true);
-    } else {
-      // Add mode
-      this.productService.addProduct(productData);
-      this.dialogRef.close(true);
+    if (this.productForm.valid) {
+      const productData = this.productForm.value;
+      if (this.data) {
+        // Edit mode
+        this.productService.updateProduct(this.data.id, productData);
+        this.dialogRef.close(true);
+      } else {
+        // Add mode
+        this.productService.addProduct(productData);
+        this.dialogRef.close(true);
+      }
     }
   }
-}
 
   onCancel() {
     this.dialogRef.close();
+  }
+
+  onDelete() {
+    if (this.data && confirm('Are you sure you want to delete this product?')) {
+      this.productService.deleteProduct(this.data.id);
+      this.dialogRef.close({ deleted: true });
+    }
   }
 }

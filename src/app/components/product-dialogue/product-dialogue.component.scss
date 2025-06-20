@@ -38,10 +38,18 @@
 
 .dialog-actions {
   display: flex;
-  justify-content: flex-end;
+  align-items: center;
   gap: 12px;
   margin-top: 8px;
   padding-bottom: 4px;
+}
+
+.delete-btn {
+  margin-right: auto;
+}
+
+.flex-spacer {
+  flex: 1 1 auto;
 }
 
 button[mat-stroked-button] {

@@ -64,10 +64,10 @@ export class ProductDetailComponent implements OnInit {
     });
 
     // use this one for dev purposes
-    this.filterForm = this.fb.group({
-      startDate: [new Date('2022-01-25')],
-      endDate: [new Date('2022-02-16')]
-    });
+    // this.filterForm = this.fb.group({
+    //   startDate: [new Date('2022-01-25')],
+    //   endDate: [new Date('2022-02-16')]
+    // });
   }
 
   ngOnInit() {

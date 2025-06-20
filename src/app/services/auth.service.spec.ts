@@ -67,15 +67,12 @@ describe('AuthService', () => {
   });
 
   it('should validate token and expiry correctly', () => {
-    // No token or expiry
     expect(service.hasValidToken()).toBeFalse();
 
-    // Expired token
     localStorage.setItem('auth_token', 't');
     localStorage.setItem('auth_token_expiry', new Date(Date.now() - 1000).toISOString());
     expect(service.hasValidToken()).toBeFalse();
 
-    // Valid token
     localStorage.setItem('auth_token', 't');
     localStorage.setItem('auth_token_expiry', new Date(Date.now() + 10000).toISOString());
     expect(service.hasValidToken()).toBeTrue();

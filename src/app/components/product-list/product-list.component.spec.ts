@@ -119,4 +119,76 @@ describe('ProductListComponent', () => {
 
     expect(component.loadProducts).not.toHaveBeenCalled();
   });
+
+  it('should update pageIndex and pageSize, and call setPagedProducts', () => {
+    const setPagedProductsSpy = spyOn(component, 'setPagedProducts');
+    const event = { pageIndex: 2, pageSize: 10 } as any;
+    component.onPageChange(event);
+    expect(component.pageIndex).toBe(2);
+    expect(component.pageSize).toBe(10);
+    expect(setPagedProductsSpy).toHaveBeenCalled();
+  });
+
+  it('should update pagedProducts according to new page', () => {
+    component.products = [
+      { id: '1', productName: 'A', url: 'a' },
+      { id: '2', productName: 'B', url: 'b' },
+      { id: '3', productName: 'C', url: 'c' },
+      { id: '4', productName: 'D', url: 'd' },
+      { id: '5', productName: 'E', url: 'e' },
+      { id: '6', productName: 'F', url: 'f' }
+    ];
+    component.pageSize = 2;
+    component.pageIndex = 0;
+    component.setPagedProducts();
+
+    const event = { pageIndex: 1, pageSize: 2 } as any;
+    component.onPageChange(event);
+
+    expect(component.pagedProducts).toEqual([
+      { id: '3', productName: 'C', url: 'c' },
+      { id: '4', productName: 'D', url: 'd' }
+    ]);
+  });
+
+  it('should set pageIndex to last page and paginator.pageIndex if goToLastPage is true', () => {
+    component.products = [];
+    component.pageSize = 2;
+    const products = [
+      { id: '1', productName: 'A', url: 'a' },
+      { id: '2', productName: 'B', url: 'b' },
+      { id: '3', productName: 'C', url: 'c' },
+      { id: '4', productName: 'D', url: 'd' },
+      { id: '5', productName: 'E', url: 'e' }
+    ];
+    productServiceSpy.getProducts.and.returnValue(of(products));
+    component.paginator = { pageIndex: 0 } as any;
+
+    component.loadProducts(true);
+
+    expect(component.pageIndex).toBe(Math.floor((products.length - 1) / component.pageSize));
+    expect(component.paginator.pageIndex).toBe(component.pageIndex);
+    expect(component.products).toEqual(products);
+    expect(component.loading).toBeFalse();
+    expect(component.error).toBeNull();
+  });
+
+  it('should not set paginator.pageIndex if paginator is undefined', () => {
+    component.products = [];
+    component.pageSize = 2;
+    const products = [
+      { id: '1', productName: 'A', url: 'a' },
+      { id: '2', productName: 'B', url: 'b' },
+      { id: '3', productName: 'C', url: 'c' }
+    ];
+    productServiceSpy.getProducts.and.returnValue(of(products));
+    component.paginator = undefined as any;
+
+    component.loadProducts(true);
+
+    expect(component.pageIndex).toBe(Math.floor((products.length - 1) / component.pageSize));
+    expect(component.products).toEqual(products);
+    expect(component.loading).toBeFalse();
+    expect(component.error).toBeNull();
+  });
 });

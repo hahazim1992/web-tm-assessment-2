@@ -1,17 +1,53 @@
+.dialog-container {
+  padding: 24px 24px 12px 24px;
+  background: #fafbfc;
+  border-radius: 14px;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+}
+
+.dialog-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #1976d2;
+}
+
+.dialog-icon {
+  font-size: 1.7rem;
+  color: #1976d2;
+  margin-bottom: 3px;
+}
+
 .dialog-form {
   display: flex;
   flex-direction: column;
-  gap: 16px;
-  min-width: 300px;
+  gap: 20px;
 }
 
 .full-width {
   width: 100%;
 }
 
+.mat-form-field {
+  background: #fff;
+  border-radius: 6px;
+}
+
 .dialog-actions {
   display: flex;
   justify-content: flex-end;
-  gap: 8px;
+  gap: 12px;
   margin-top: 8px;
+  padding-bottom: 4px;
+}
+
+button[mat-stroked-button] {
+  border-color: #bdbdbd;
+}
+
+button[mat-raised-button] {
+  min-width: 90px;
 }

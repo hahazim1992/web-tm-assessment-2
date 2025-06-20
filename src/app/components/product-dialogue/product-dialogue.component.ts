@@ -5,6 +5,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
 import { CommonModule } from '@angular/common';
 import { ProductService, Product } from '../../services/product.service';
+import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-product-dialog',
@@ -14,7 +15,8 @@ import { ProductService, Product } from '../../services/product.service';
     ReactiveFormsModule,
     MatDialogModule,
     MatButtonModule,
-    MatInputModule
+    MatInputModule,
+    MatIcon
   ],
   templateUrl: './product-dialogue.component.html',
   styleUrl: './product-dialogue.component.scss'

@@ -71,4 +71,29 @@ export class ProductService {
     const updated = products.filter(p => p.id !== id);
     this.save(updated);
   }
+
+  getProductAlerts(
+    productId: string,
+    pageIndex: number,
+    pageSize: number,
+    startDate: string,
+    endDate: string
+  ): Observable<{ data: any[]; total: number }> {
+    const token = this.auth.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+    });
+    return this.http.get<{ data: any[]; total: number }>(
+      `https://intermediate-test-v-2-web-test.apps.ocp.tmrnd.com.my/api/data/alert/list/${productId}`,
+      {
+        headers,
+        params: {
+          indexNumber: pageIndex.toString(),
+          pageSize: pageSize.toString(),
+          startDate,
+          endDate
+        }
+      }
+    );
+  }
 }

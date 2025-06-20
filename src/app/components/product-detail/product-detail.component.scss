@@ -1,0 +1,30 @@
+.product-detail-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 32px;
+
+  mat-card {
+    width: 100%;
+    max-width: 900px;
+    padding: 24px 0 0 0;
+  }
+}
+
+.filter-form {
+  display: flex;
+  gap: 16px;
+  align-items: flex-end;
+  margin-bottom: 16px;
+}
+
+.loading-spinner {
+  display: flex;
+  justify-content: center;
+  margin: 24px 0;
+}
+
+.no-data {
+  text-align: center;
+  color: #888;
+  margin: 24px 0;
+}

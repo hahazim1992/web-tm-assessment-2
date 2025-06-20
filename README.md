@@ -65,4 +65,8 @@ at the root of the project
 - ✅ The size per page of the table is 5.
 - 🗯️: Also completed pagination
 
+# Extra Points
+
+- ✅ Unit Test with 100% statement, branches, functions and lines coverage
+- ✅ host the project at a remote server
 

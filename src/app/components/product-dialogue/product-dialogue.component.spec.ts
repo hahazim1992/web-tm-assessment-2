@@ -1,18 +1,26 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ProductDialogueComponent } from './product-dialogue.component';
+import { ProductDialogComponent } from './product-dialogue.component';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
-describe('ProductDialogueComponent', () => {
-  let component: ProductDialogueComponent;
-  let fixture: ComponentFixture<ProductDialogueComponent>;
+describe('ProductDialogComponent', () => {
+  let component: ProductDialogComponent;
+  let fixture: ComponentFixture<ProductDialogComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [ProductDialogueComponent]
+      imports: [ProductDialogComponent, HttpClientTestingModule, ],
+      providers: [
+        { provide: MatDialogRef, useValue: {} },
+        { provide: MAT_DIALOG_DATA, useValue: {} },
+        provideAnimations(),
+      ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(ProductDialogueComponent);
+    fixture = TestBed.createComponent(ProductDialogComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

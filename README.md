@@ -1,5 +1,5 @@
 # Project hosted online, alternatively, continue below to setup project locally
-- FE Angular hosted using github pages, visit https://github.com/hahazim1992/web-tm-assessment-2
+- FE Angular hosted using render, visit https://web-tm-assessment-2.onrender.com
 
 
 # TMRND Web Assessment - Get Started
@@ -69,4 +69,7 @@ at the root of the project
 
 - ✅ Unit Test with 100% statement, branches, functions and lines coverage
 - ✅ host the project at a remote server
+
+# IMPORTANT DEV NOTES
+- 🗯️: The route, guard and auth redirection seems to be wonky when hosted on render, it just shows page not found when we force the url. but it works, user unable to access other modules when not authenticated. This can be proven when routes works correctly on local
 

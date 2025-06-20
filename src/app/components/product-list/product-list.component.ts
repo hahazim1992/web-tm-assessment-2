@@ -9,6 +9,8 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
+import { PageEvent } from '@angular/material/paginator';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-product-list',
@@ -21,16 +23,20 @@ import { CommonModule } from '@angular/common';
     MatProgressSpinnerModule,
     MatTableModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatPaginatorModule
   ],
   templateUrl: './product-list.component.html',
   styleUrl: './product-list.component.scss'
 })
 export class ProductListComponent implements OnInit {
   products: Product[] = [];
+  pagedProducts: Product[] = [];
   loading = true;
   error: string | null = null;
   displayedColumns = ['productName', 'address', 'action'];
+  pageSize = 5;
+  pageIndex = 0;
 
   constructor(
     private productService: ProductService,
@@ -46,6 +52,7 @@ export class ProductListComponent implements OnInit {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
+        this.setPagedProducts();
         this.loading = false;
       },
       error: () => {
@@ -53,6 +60,18 @@ export class ProductListComponent implements OnInit {
         this.loading = false;
       }
     });
+  }
+
+  setPagedProducts() {
+    const start = this.pageIndex * this.pageSize;
+    const end = start + this.pageSize;
+    this.pagedProducts = this.products.slice(start, end);
+  }
+
+  onPageChange(event: PageEvent) {
+    this.pageIndex = event.pageIndex;
+    this.pageSize = event.pageSize;
+    this.setPagedProducts();
   }
 
   openProductDialog(product?: Product) {

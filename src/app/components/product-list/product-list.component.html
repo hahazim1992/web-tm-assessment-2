@@ -50,6 +50,12 @@
               [ngClass]="{'zebra': (i % 2) === 1}">
           </tr>
         </table>
+        <mat-paginator
+          [length]="products.length"
+          [pageSize]="pageSize"
+          [pageSizeOptions]="[5]"
+          (page)="onPageChange($event)">
+        </mat-paginator>
       </div>
     </mat-card-content>
   </mat-card>

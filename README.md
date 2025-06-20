@@ -2,7 +2,7 @@
 - FE Angular hosted using github pages, visit https://github.com/hahazim1992/web-tm-assessment-2
 
 
-# CurrencyDashboard - Get Started
+# TMRND Web Assessment - Get Started
 
 - git clone https://github.com/hahazim1992/web-tm-assessment-2
 - checkout main
@@ -59,7 +59,10 @@ at the root of the project
 - 🗯️: Able to fullfill as per requirement. Not using any API to add and edit
 #
 - ✅ Detail Page / Product Detail
-
-
+- ✅ By clicking on the product name in the product list table at home page, user will be rerouted to another page with its product id as path parameter.
+- ✅ Given the following API, develop another table where:
+- ✅ The start and end date by default is yesterday’s and today’s date, respectively.
+- ✅ The size per page of the table is 5.
+- 🗯️: Also completed pagination
 
 

@@ -21,7 +21,7 @@
 
 mat-card {
   width: 100%;
-  max-width: 900px;
+  max-width: 950px;
   padding: 32px 32px 24px 32px;
   border-radius: 16px;
   box-shadow: 0 4px 24px rgba(0,0,0,0.08);
@@ -46,30 +46,89 @@ mat-card-content {
   margin-bottom: 24px;
 }
 
+.filter-btn {
+  margin-bottom: 1.7rem;
+}
+
+.table-wrapper {
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1.5px solid rgba(25, 118, 210, 0.13);
+  margin-bottom: 16px;
+  background: #fff;
+}
+
 .alert-table {
   width: 100%;
-  margin-bottom: 16px;
-  border-radius: 8px;
-  overflow: hidden;
+  border-collapse: separate;
+  border-spacing: 0;
 }
 
 th.mat-header-cell {
-  background: #f5f5f5;
+  background: linear-gradient(90deg, #e3f2fd 0%, #f5f5f5 100%);
   color: #1976d2;
-  font-weight: 600;
-  font-size: 1.05rem;
-  border-bottom: 2px solid #e0e0e0;
-  padding: 12px 8px;
+  font-weight: 700;
+  font-size: 1.08rem;
+  border-bottom: 2px solid rgba(25, 118, 210, 0.13);
+  padding: 18px 18px;
+  letter-spacing: 0.5px;
+  border-right: 1px solid rgba(25, 118, 210, 0.10);
+}
+
+th.mat-header-cell:last-child {
+  border-right: none;
 }
 
 td.mat-cell {
-  font-size: 1rem;
-  padding: 12px 8px;
-  border-bottom: 1px solid #e0e0e0;
+  font-size: 1.08rem;
+  padding: 18px 18px;
+  border-bottom: 1px solid rgba(25, 118, 210, 0.10);
+  border-right: 1px solid rgba(25, 118, 210, 0.07);
+  vertical-align: middle;
+  transition: background 0.2s;
+}
+
+td.mat-cell:last-child {
+  border-right: none;
+}
+
+tr.mat-row.zebra {
+  background: #f8fafc;
 }
 
 tr.mat-row:hover {
-  background: #f0f7fa;
+  background: #e3f2fd;
+}
+
+.status-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 18px 6px 10px;
+  border-radius: 16px;
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 4px rgba(56, 142, 60, 0.04);
+  &.up {
+    background: #e8f5e9;
+    color: #388e3c;
+    border: 1px solid #b2dfdb;
+  }
+  &.down {
+    background: #ffebee;
+    color: #d32f2f;
+    border: 1px solid #ffcdd2;
+  }
+}
+
+.status-icon {
+  font-size: 1.2rem;
+  vertical-align: middle;
+}
+
+.mat-paginator {
+  margin-top: 12px;
 }
 
 .loading-spinner {
@@ -85,6 +144,13 @@ tr.mat-row:hover {
   font-size: 1.1rem;
 }
 
-.filter-btn {
-  margin-bottom: 1.7rem;
+@media (max-width: 700px) {
+  mat-card {
+    padding: 16px 2vw 12px 2vw;
+  }
+  .alert-table th.mat-header-cell,
+  .alert-table td.mat-cell {
+    padding: 10px 4px;
+    font-size: 0.97rem;
+  }
 }

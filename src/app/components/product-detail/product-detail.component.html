@@ -25,26 +25,41 @@
         <div *ngIf="loading" class="loading-spinner">
           <mat-progress-spinner mode="indeterminate" diameter="40"></mat-progress-spinner>
         </div>
-        <table mat-table [dataSource]="data" class="mat-elevation-z8 alert-table" *ngIf="!loading && data.length">
-          <ng-container matColumnDef="status">
-            <th mat-header-cell *matHeaderCellDef>Status</th>
-            <td mat-cell *matCellDef="let element">{{ element.status }}</td>
-          </ng-container>
-          <ng-container matColumnDef="dateTimeString">
-            <th mat-header-cell *matHeaderCellDef>Date/Time</th>
-            <td mat-cell *matCellDef="let element">{{ element.dateTimeString }}</td>
-          </ng-container>
-          <ng-container matColumnDef="remark">
-            <th mat-header-cell *matHeaderCellDef>Remark</th>
-            <td mat-cell *matCellDef="let element">{{ element.remark }}</td>
-          </ng-container>
-          <ng-container matColumnDef="durationString">
-            <th mat-header-cell *matHeaderCellDef>Duration</th>
-            <td mat-cell *matCellDef="let element">{{ element.durationString }}</td>
-          </ng-container>
-          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        </table>
+        <div class="table-wrapper" *ngIf="!loading && data.length">
+          <table mat-table [dataSource]="data" class="mat-elevation-z8 alert-table">
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef>Status</th>
+              <td mat-cell *matCellDef="let element">
+                <span class="status-chip" [ngClass]="element.status === 'Up' ? 'up' : 'down'">
+                  <mat-icon class="status-icon" *ngIf="element.status === 'Up'">check_circle</mat-icon>
+                  <mat-icon class="status-icon" *ngIf="element.status !== 'Up'">error</mat-icon>
+                  {{ element.status }}
+                </span>
+              </td>
+            </ng-container>
+            <!-- Date/Time Column -->
+            <ng-container matColumnDef="dateTimeString">
+              <th mat-header-cell *matHeaderCellDef>Date/Time</th>
+              <td mat-cell *matCellDef="let element">{{ element.dateTimeString }}</td>
+            </ng-container>
+            <!-- Remark Column -->
+            <ng-container matColumnDef="remark">
+              <th mat-header-cell *matHeaderCellDef>Remark</th>
+              <td mat-cell *matCellDef="let element">{{ element.remark }}</td>
+            </ng-container>
+            <!-- Duration Column -->
+            <ng-container matColumnDef="durationString">
+              <th mat-header-cell *matHeaderCellDef>Duration</th>
+              <td mat-cell *matCellDef="let element">{{ element.durationString }}</td>
+            </ng-container>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row
+                *matRowDef="let row; columns: displayedColumns; let i = index"
+                [ngClass]="{'zebra': (i % 2) === 1}">
+            </tr>
+          </table>
+        </div>
         <mat-paginator
           [length]="total"
           [pageSize]="pageSize"

@@ -66,12 +66,6 @@ export class ProductListComponent implements OnInit {
         this.loadProducts();
       }
     });
-
-    dialogRef.afterClosed().subscribe(result => {
-      if (result) {
-        this.loadProducts();
-      }
-    });
   }
 
   goToProduct(product: Product) {

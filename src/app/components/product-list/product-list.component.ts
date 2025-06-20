@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ProductService, Product } from '../../services/product.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProductDialogComponent } from '../product-dialogue/product-dialogue.component';
@@ -9,7 +9,7 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { PageEvent } from '@angular/material/paginator';
+import { PageEvent, MatPaginator } from '@angular/material/paginator';
 import { MatPaginatorModule } from '@angular/material/paginator';
 
 @Component({
@@ -38,6 +38,8 @@ export class ProductListComponent implements OnInit {
   pageSize = 5;
   pageIndex = 0;
 
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+
   constructor(
     private productService: ProductService,
     private dialog: MatDialog,
@@ -48,10 +50,17 @@ export class ProductListComponent implements OnInit {
     this.loadProducts();
   }
 
-  loadProducts() {
+  loadProducts(goToLastPage = false) {
     this.productService.getProducts().subscribe({
       next: (data) => {
         this.products = data;
+        if (goToLastPage) {
+          this.pageIndex = Math.floor((this.products.length - 1) / this.pageSize);
+          
+          if (this.paginator) {
+            this.paginator.pageIndex = this.pageIndex;
+          }
+        }
         this.setPagedProducts();
         this.loading = false;
       },
@@ -82,7 +91,7 @@ export class ProductListComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadProducts();
+        this.loadProducts(true);
       }
     });
   }

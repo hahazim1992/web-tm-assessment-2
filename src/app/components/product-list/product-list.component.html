@@ -12,7 +12,7 @@
       <div class="table-wrapper" *ngIf="!loading && !error">
         <table
           mat-table
-          [dataSource]="products"
+          [dataSource]="pagedProducts"
           class="mat-elevation-z8 product-table"
         >
           <!-- Product Name Column -->

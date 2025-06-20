@@ -30,7 +30,7 @@ export class ProductListComponent implements OnInit {
   products: Product[] = [];
   loading = true;
   error: string | null = null;
-  displayedColumns = ['productName', 'url', 'action'];
+  displayedColumns = ['productName', 'address', 'action'];
 
   constructor(
     private productService: ProductService,

@@ -28,9 +28,9 @@
             </a>
           </td>
         </ng-container>
-        <!-- URL Column -->
-        <ng-container matColumnDef="url">
-          <th mat-header-cell *matHeaderCellDef>URL</th>
+        <!-- Address Column -->
+        <ng-container matColumnDef="address">
+          <th mat-header-cell *matHeaderCellDef>Address</th>
           <td mat-cell *matCellDef="let product">
             <a [href]="product.url" target="_blank">{{ product.url }}</a>
           </td>

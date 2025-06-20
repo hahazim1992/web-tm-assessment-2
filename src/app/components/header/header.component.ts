@@ -13,7 +13,12 @@ import { CommonModule } from '@angular/common';
 })
 export class HeaderComponent {
   constructor(private auth: AuthService, private router: Router) {}
+
   logout() {
     this.auth.logout();
+  }
+
+  get isLoginPage(): boolean {
+    return this.router.url === '/login';
   }
 }
